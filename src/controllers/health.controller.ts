@@ -1,5 +1,6 @@
 import type { Request, Response } from 'express';
 import db from '../database/knex';
+import HttpStatus from '../utils/http-status';
 
 export default class HealthController {
   static async index(_req: Request, res: Response) {
@@ -10,7 +11,7 @@ export default class HealthController {
     } catch (e) {
     }
     
-    res.status(200).json({
+    res.status(HttpStatus.OK).json({
       webStatus: 'ok',
       webUptime: process.uptime(),
       databaseClient: db.getClient(),
