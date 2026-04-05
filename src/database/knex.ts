@@ -1,7 +1,7 @@
 import dotenv from 'dotenv';
 import knex from 'knex';
 
-dotenv.config();
+dotenv.config({ quiet: true });
 
 const db = knex({
   client: 'pg',
@@ -14,7 +14,4 @@ const db = knex({
   },
 });
 
-export default {
-  ...db,
-  getClient: (): string => `${db.client.config.client}`,
-};
+export default db;

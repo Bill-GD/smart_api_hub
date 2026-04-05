@@ -1,6 +1,8 @@
 # 📝 Long Assignment: Smart API Hub
 
-**Hình thức:** Cá nhân | **Thời gian:** 1 tuần | **Mục tiêu:** Xây dựng một REST API Platform tự động sinh API từ file `schema.json`.
+**Hình thức:** Cá nhân
+**Thời gian:** 1 tuần
+**Mục tiêu:** Xây dựng một REST API Platform tự động sinh API từ file `schema.json`.
 
 ---
 
@@ -15,8 +17,8 @@
 ## 📋 Yêu Cầu Chức Năng (Checklist)
 
 ### 1. Khởi tạo & Auto-Migration (1đ)
-- [ ] Chạy từ file `schema.json` tự chọn (tối thiểu 3 bảng có liên kết, bảng `users` phải có `email`, `password`, `role`).
-- [ ] Tự động nội suy kiểu dữ liệu và tạo bảng PostgreSQL nếu chưa có.
+- [x] Chạy từ file `schema.json` tự chọn (tối thiểu 3 bảng có liên kết, bảng `users` phải có `email`, `password`, `role`).
+- [x] Tự động nội suy kiểu dữ liệu và tạo bảng PostgreSQL nếu chưa có.
 - [x] Endpoint `GET /health` trả về status và ping DB thật.
 
 ### 2. Dynamic CRUD (2đ)

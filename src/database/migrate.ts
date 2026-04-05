@@ -1,4 +1,5 @@
 import fs from 'node:fs';
+import { getDBClient } from '../utils/helpers';
 import db from './knex';
 
 const ON_UPDATE_TIMESTAMP_FUNCTION = `
@@ -47,7 +48,7 @@ export async function runMigration(path: string) {
       Object.entries(sample).forEach(([col, val]) => {
         if (col === 'id') return;
         
-        if (col === 'password') table.string(col, 60);
+        if (col === 'password') table.specificType(col, 'char(60)');
         else if (typeof val === 'number') table.integer(col);
         else if (typeof val === 'boolean') table.boolean(col);
         else table.text(col);
@@ -55,12 +56,17 @@ export async function runMigration(path: string) {
       
       table.timestamps(true, true);
     });
-    if (db.getClient() === 'pg') {
+    if (getDBClient() === 'pg') {
       await db.raw(onUpdateTrigger(tableName));
     }
-    console.log(`Created table: "${tableName}"`);
+    
+    await db(tableName).insert(sample);
+    
+    console.log(`Created table: "${tableName}" and seeded 1 record`);
   }
-  if (!changed) {
-    console.log('No schema changes, skipping migration');
+  if (changed) {
+    console.log('Finished migration');
+  } else {
+    console.log('No schema changes, skipped migration');
   }
 }
