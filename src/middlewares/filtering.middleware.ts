@@ -1,7 +1,7 @@
 import { NextFunction } from 'express';
 import { checkField } from '../utils/helpers';
 import HttpStatus from '../utils/http-status';
-import { ResourceRequest, ResourceResponse } from '../utils/types';
+import { HttpError, ResourceRequest, ResourceResponse } from '../utils/types';
 
 const opMapping: { [k: string]: string } = {
   '_eq': '=',
@@ -25,9 +25,10 @@ export default async function filtering(req: ResourceRequest, res: ResourceRespo
     const [field, op = '_eq'] = [split[0]!, split[1]];
     
     if (!(await checkField(tableName, field))) {
-      res
-        .status(HttpStatus.BAD_REQUEST)
-        .json({ message: `Field "${field}" doesn't exist for resource "${tableName}"` });
+      next(new HttpError(
+        HttpStatus.BAD_REQUEST,
+        `Field "${field}" doesn't exist for resource "${tableName}"`,
+      ));
       return;
     }
     
