@@ -4,14 +4,14 @@ import HttpStatus from '../utils/http-status';
 import { HttpError, ResourceRequest, ResourceResponse } from '../utils/types';
 
 export default async function validateFields(req: ResourceRequest, res: ResourceResponse, next: NextFunction) {
+  const { resource: tableName } = req.params;
   const { _fields } = req.query;
+  
   if (!_fields) {
-    res.locals.columns = ['*'];
+    res.locals.columns = [`${tableName}.*`];
     next();
     return;
   }
-  
-  const { resource: tableName } = req.params;
   
   const tableColumns: string[] = (await db('information_schema.columns')
     .select('column_name')
@@ -24,7 +24,7 @@ export default async function validateFields(req: ResourceRequest, res: Resource
   const columns = [];
   for (const field of _fields.split(',')) {
     if (tableColumns.includes(field)) {
-      columns.push(field);
+      columns.push(`${tableName}.${field}`);
       continue;
     }
     

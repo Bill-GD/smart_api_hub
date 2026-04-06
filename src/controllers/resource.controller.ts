@@ -33,26 +33,29 @@ export default class ResourceController {
       }
     }
     
+    if (relation?.expand) {
+      const parentTable = relation.expand.table;
+      query
+        .innerJoin(
+          parentTable,
+          `${tableName}.${relation.expand.foreignKey}`,
+          `${parentTable}.id`,
+        )
+        .select(db.raw(`to_jsonb(${parentTable}) as ${relation.expand.prop}`));
+    }
+    if (relation?.embed) {
+      const childTable = relation.embed.table;
+      const subquery = db(childTable)
+        .select(db.raw(`COALESCE(json_agg(to_jsonb(${childTable})), '[]')`))
+        .where(`${childTable}.${relation.embed.foreignKey}`, db.ref(`${tableName}.id`));
+      query.select(subquery.as(relation.embed.table));
+    }
+    
     // @ts-ignore
     const [result, [{ count }]] = await Promise.all([
       query,
       db(tableName).count('id as count'),
     ]);
-    
-    if (relation?.expand) {
-      const fkValues = result.map((r) => r[relation.expand!.foreignKey]);
-      const parents = await db(relation.expand.table).whereIn('id', fkValues);
-      for (let i = 0; i < result.length; i++) {
-        result[i][relation.expand.prop] = parents.find((p) => result[i][relation.expand!.foreignKey] === p['id']);
-      }
-    }
-    if (relation?.embed) {
-      const ids = result.map((r) => r['id']);
-      const children = await db(relation.embed.table).whereIn(relation.embed.foreignKey, ids);
-      for (let i = 0; i < result.length; i++) {
-        result[i][relation.embed.table] = children.filter((c) => result[i]['id'] === c[relation.embed!.foreignKey]);
-      }
-    }
     
     res.setHeader('X-Total-Count', count);
     res.status(HttpStatus.OK).json(result);
@@ -64,19 +67,28 @@ export default class ResourceController {
     
     const query = db(tableName)
       .select(...res.locals.columns)
-      .where({ id })
+      .where(`${tableName}.id`, id)
       .first();
     
-    const result = await query;
-    
     if (relation?.expand) {
-      const fkValue = result[relation.expand.foreignKey];
-      result[relation.expand.prop] = await db(relation.expand.table).where('id', fkValue).first();
+      const parentTable = relation.expand.table;
+      query
+        .innerJoin(
+          parentTable,
+          `${tableName}.${relation.expand.foreignKey}`,
+          `${parentTable}.id`,
+        )
+        .select(db.raw(`to_jsonb(${parentTable}) as ${relation.expand.prop}`));
     }
     if (relation?.embed) {
-      result[relation.embed.table] = await db(relation.embed.table).where(relation.embed.foreignKey, id);
+      const childTable = relation.embed.table;
+      const subquery = db(childTable)
+        .select(db.raw(`COALESCE(json_agg(to_jsonb(${childTable})), '[]')`))
+        .where(`${childTable}.${relation.embed.foreignKey}`, id);
+      query.select(subquery.as(relation.embed.table));
     }
     
+    const result = await query;
     res.status(HttpStatus.OK).json(result);
   }
   
