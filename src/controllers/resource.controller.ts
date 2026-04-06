@@ -33,7 +33,11 @@ export default class ResourceController {
       }
     }
     
-    const result = await query;
+    // @ts-ignore
+    const [result, [{ count }]] = await Promise.all([
+      query,
+      db(tableName).count('id as count'),
+    ]);
     
     if (relation?.expand) {
       const fkValues = result.map((r) => r[relation.expand!.foreignKey]);
@@ -50,7 +54,7 @@ export default class ResourceController {
       }
     }
     
-    res.setHeader('X-Total-Count', result.length);
+    res.setHeader('X-Total-Count', count);
     res.status(HttpStatus.OK).json(result);
   }
   
