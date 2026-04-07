@@ -37,7 +37,7 @@
 
 - [x] **Pagination & Sorting**: `_page`, `_limit`, `_sort`, `_order` (trả về header `X-Total-Count`).
 - [x] **Filtering**: `_gte`, `_lte`, `_ne`, `_like`, `_eq`, `_lt`, `_gt`.
-- [ ] **Full Text Search**: `?q=keyword` tìm kiếm trên các cột text.
+- [x] **Full Text Search**: `?q=keyword` tìm kiếm trên các cột text.
 
 ### 4. Relationships (Tối ưu N+1 Query) (1.5đ)
 

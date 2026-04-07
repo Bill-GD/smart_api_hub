@@ -3,7 +3,7 @@ import { checkField } from '../utils/helpers';
 import HttpStatus from '../utils/http-status';
 import { HttpError, ResourceRequest, ResourceResponse } from '../utils/types';
 
-const opMapping: { [k: string]: string } = {
+const opMapping: Record<string, string> = {
   '_eq': '=',
   '_ne': '!=',
   '_gte': '>=',
@@ -19,7 +19,7 @@ export default async function filtering(req: ResourceRequest, res: ResourceRespo
   const whereClauses: { field: string; op: string; value: string; }[] = [];
   
   for (const [query, value] of Object.entries(queries)) {
-    if (query.startsWith('_')) continue;
+    if (query.startsWith('_') || query === 'q') continue;
     
     const split = query.split(':');
     const [field, op = '_eq'] = [split[0]!, split[1]];

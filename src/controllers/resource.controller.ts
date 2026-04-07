@@ -1,5 +1,6 @@
 import { Knex } from 'knex';
 import db from '../database/knex';
+import { NotFoundError } from '../utils/http-error';
 import HttpStatus from '../utils/http-status';
 import { ResourceRequest, ResourceResponse } from '../utils/types';
 
@@ -51,6 +52,17 @@ export default class ResourceController {
       query.select(subquery.as(relation.embed.table));
     }
     
+    if (req.query.q) {
+      const textColumns = (await db('information_schema.columns')
+        .select('column_name')
+        .whereIn('data_type', ['text', 'character', 'varying character'])
+        .andWhere({ table_schema: 'public', table_name: tableName })).map((r) => r['column_name']);
+      
+      query.where((builder) => {
+        textColumns.forEach((c) => builder.orWhereILike(c, `%${req.query.q}%`));
+      });
+    }
+    
     // @ts-ignore
     const [result, [{ count }]] = await Promise.all([
       query,
@@ -89,6 +101,9 @@ export default class ResourceController {
     }
     
     const result = await query;
+    if (!result) {
+      throw new NotFoundError(tableName, id);
+    }
     res.status(HttpStatus.OK).json(result);
   }
   
@@ -120,13 +135,19 @@ export default class ResourceController {
   
   static async patchOne(req: ResourceRequest, res: ResourceResponse) {
     const { resource: tableName, id } = req.params;
-    await db(tableName).update(req.body).where({ id });
+    const result = await db(tableName).where({ id }).update(req.body);
+    if (result <= 0) {
+      throw new NotFoundError(tableName, id);
+    }
     res.sendStatus(HttpStatus.NO_CONTENT);
   }
   
   static async deleteOne(req: ResourceRequest, res: ResourceResponse) {
     const { resource: tableName, id } = req.params;
-    await db(tableName).where({ id }).delete();
+    const rows = await db(tableName).where({ id }).del();
+    if (rows <= 0) {
+      throw new NotFoundError(tableName, id);
+    }
     res.sendStatus(HttpStatus.NO_CONTENT);
   }
 }

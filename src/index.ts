@@ -5,7 +5,7 @@ import { runMigration } from './database/migrate';
 import healthRouter from './routes/health.router';
 import resourceRouter from './routes/resource.router';
 import HttpStatus from './utils/http-status';
-import { HttpError } from './utils/types';
+import { HttpError } from './utils/http-error';
 
 const app = express();
 
