@@ -14,3 +14,9 @@ export class NotFoundError extends HttpError {
     super(HttpStatus.NOT_FOUND, `Resource "${tableName}" with ID=${id} doesn't exist`);
   }
 }
+
+export class ForbiddenError extends HttpError {
+  constructor(message: string) {
+    super(HttpStatus.FORBIDDEN, message);
+  }
+}

@@ -1,5 +1,6 @@
 import express from 'express';
 import ResourceController from '../controllers/resource.controller';
+import authorize from '../middlewares/authorize.middleware';
 import blockResources from '../middlewares/block-users.middleware';
 import filtering from '../middlewares/filtering.middleware';
 import pagination from '../middlewares/pagination.middleware';
@@ -20,11 +21,12 @@ router.get('/',
   relation,
   ResourceController.getAll,
 );
-
 router.get('/:id', validateFields, relation, ResourceController.getOne);
+router.delete('/:id', authorize('admin'), ResourceController.deleteOne);
+
+router.use(authorize('user', 'admin'));
 router.post('/', blockResources('users'), ResourceController.postOne);
 router.put('/:id', ResourceController.putOne);
 router.patch('/:id', ResourceController.patchOne);
-router.delete('/:id', ResourceController.deleteOne);
 
 export default router;

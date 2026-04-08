@@ -1,7 +1,8 @@
 import { NextFunction, Response } from 'express';
 import { checkResource } from '../utils/helpers';
+import { HttpError } from '../utils/http-error';
 import HttpStatus from '../utils/http-status';
-import { HttpError, ResourceRequest } from '../utils/types';
+import { ResourceRequest } from '../utils/types';
 
 export default async function validateResource(req: ResourceRequest, res: Response, next: NextFunction) {
   const { resource: tableName } = req.params;

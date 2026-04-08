@@ -1,7 +1,8 @@
 import { NextFunction } from 'express';
 import { checkField } from '../utils/helpers';
+import { HttpError } from '../utils/http-error';
 import HttpStatus from '../utils/http-status';
-import { HttpError, ResourceRequest, ResourceResponse } from '../utils/types';
+import { ResourceRequest, ResourceResponse } from '../utils/types';
 
 export default async function sorting(req: ResourceRequest, res: ResourceResponse, next: NextFunction) {
   const { resource: tableName } = req.params;

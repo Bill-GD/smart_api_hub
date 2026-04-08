@@ -14,4 +14,8 @@ export default class CryptoService {
   static generateToken(payload: User) {
     return jwt.sign(payload, process.env.JWT_SECRET!, { expiresIn: '1h' });
   }
+  
+  static verifyToken(token: string): User {
+    return <User>jwt.verify(token, process.env.JWT_SECRET!);
+  }
 }
