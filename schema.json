@@ -1,2 +1,36 @@
 {
+  "users": [
+    {
+      "id": 1,
+      "username": "billgd",
+      "email": "billgd@gmail.com",
+      "password": "$2b$10$ukBs4x8nxgVOl97Z4TqJSeGEFfuzclk0aYjPwxicK5D.6aJ6s2/FG",
+      "role": "admin"
+    },
+    {
+      "id": 2,
+      "username": "user123",
+      "email": "user123@gmail.com",
+      "password": "$2b$10$DYfIwWvVRJ7oj66a6KfbqeYMDxCbClOZJetLpj/emK.BTew/ncC9m",
+      "role": "user"
+    }
+  ],
+  "posts": [
+    {
+      "id": 1,
+      "user_id": 1,
+      "title": "Soluta illum pariatur",
+      "content": "Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nihil praesent ullamcorper nobis anim aliquip dolor stet takimata cum assum fugiat invidunt consequat augue at. Consetetur nobis no.",
+      "likes": 5
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "post_id": 1,
+      "user_id": 1,
+      "content": "Ut mazim eirmod at obcaecat sit aliqua facilisis assum.",
+      "likes": 2
+    }
+  ]
 }

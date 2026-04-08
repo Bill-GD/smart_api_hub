@@ -1,6 +1,5 @@
 import { NextFunction } from 'express';
-import { HttpError } from '../utils/http-error';
-import HttpStatus from '../utils/http-status';
+import { BadRequestError } from '../utils/http-error';
 import { ResourceRequest, ResourceResponse } from '../utils/types';
 
 export default async function pagination(req: ResourceRequest, res: ResourceResponse, next: NextFunction) {
@@ -8,10 +7,7 @@ export default async function pagination(req: ResourceRequest, res: ResourceResp
   const page = +_page, limit = +_limit;
   
   if (isNaN(page) || page <= 0 || isNaN(limit) || limit <= 0) {
-    next(new HttpError(
-      HttpStatus.BAD_REQUEST,
-      `Invalid page (${_page}) and/or limit (${_limit})`,
-    ));
+    next(new BadRequestError(`Invalid page (${_page}) and/or limit (${_limit})`));
     return;
   }
   

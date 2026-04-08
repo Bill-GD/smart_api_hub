@@ -5,6 +5,7 @@ import authRouter from './routes/auth.router';
 
 import healthRouter from './routes/health.router';
 import resourceRouter from './routes/resource.router';
+import { generateZod } from './utils/generate-zod';
 import { HttpError } from './utils/http-error';
 import HttpStatus from './utils/http-status';
 
@@ -24,17 +25,21 @@ app.use((err: Error, _req: Request, res: Response, _next: NextFunction) => {
   }
   
   console.error(err);
-  res.status(HttpStatus.INTERNAL_ERROR).json({ error: err.message });
+  // @ts-ignore
+  res.status(err?.statusCode ?? HttpStatus.INTERNAL_ERROR).json({ error: err.message });
 });
 
 const port = process.env.PORT || 2000;
+const jsonSchemaPath = './schema.json';
 
 async function bootstrap() {
   try {
-    await runMigration('./schema.json');
+    await runMigration(jsonSchemaPath);
   } catch (e) {
     console.log('Database not connected, skipping migration');
   }
+  
+  generateZod(jsonSchemaPath);
   
   app.listen(port, () => {
     console.log(`Server is running on http://localhost:${port}`);

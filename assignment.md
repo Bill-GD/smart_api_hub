@@ -30,7 +30,7 @@
 - [x] **GET `/:resource`**: Lọc các field với `?_fields=col1,col2`.
 - [x] **POST `/:resource`**
 - [x] **PUT / PATCH / DELETE `/:resource/:id`**:
-  - [ ] Khác biệt chuẩn giữa PUT (thay toàn bộ) vs PATCH (cập nhật 1 phần).
+  - [x] Khác biệt chuẩn giữa PUT (thay toàn bộ) vs PATCH (cập nhật 1 phần).
   - [x] Whitelist validate input `tableName` (chống SQL Injection).
 
 ### 3. Advanced Query (1.5đ)
@@ -52,7 +52,7 @@
 ### 6. Production Ready (1.5đ)
 
 - [x] **Global Error Handler**: Bắt lỗi server, DB không bị crash. Response chuẩn `{ "error": "message" }`.
-- [ ] **Validation (Zod)**: Bắt buộc check format ở Register, Login và các POST/PUT endpoints. Trả HTTP 400.
+- [x] **Validation (Zod)**: Bắt buộc check format ở Register, Login và các POST/PUT endpoints. Trả HTTP 400.
 - [ ] **Testing**: Viết tối thiểu **10 Test Cases** (Vitest + Supertest) cover đủ Happy path, Lỗi 400/401/403/404.
 
 ### 7. Deployment & Docs API (1đ)

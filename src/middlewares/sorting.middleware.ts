@@ -1,7 +1,6 @@
 import { NextFunction } from 'express';
 import { checkField } from '../utils/helpers';
-import { HttpError } from '../utils/http-error';
-import HttpStatus from '../utils/http-status';
+import { BadRequestError } from '../utils/http-error';
 import { ResourceRequest, ResourceResponse } from '../utils/types';
 
 export default async function sorting(req: ResourceRequest, res: ResourceResponse, next: NextFunction) {
@@ -12,10 +11,7 @@ export default async function sorting(req: ResourceRequest, res: ResourceRespons
   const column = _sort.startsWith('-') ? _sort.substring(1) : _sort;
   
   if (!(await checkField(tableName, column))) {
-    next(new HttpError(
-      HttpStatus.BAD_REQUEST,
-      `Field "${column}" doesn't exist for resource "${tableName}"`,
-    ));
+    next(new BadRequestError(`Field "${column}" doesn't exist for resource "${tableName}"`));
     return;
   }
   

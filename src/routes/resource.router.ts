@@ -6,6 +6,7 @@ import filtering from '../middlewares/filtering.middleware';
 import pagination from '../middlewares/pagination.middleware';
 import relation from '../middlewares/relation.middleware';
 import sorting from '../middlewares/sorting.middleware';
+import validateBody from '../middlewares/validate-body.middleware';
 import validateFields from '../middlewares/validate-fields.middleware';
 import validateResource from '../middlewares/validate-resource.middleware';
 
@@ -24,7 +25,7 @@ router.get('/',
 router.get('/:id', validateFields, relation, ResourceController.getOne);
 router.delete('/:id', authorize('admin'), ResourceController.deleteOne);
 
-router.use(authorize('user', 'admin'));
+router.use(authorize('user', 'admin'), validateBody);
 router.post('/', blockResources('users'), ResourceController.postOne);
 router.put('/:id', ResourceController.putOne);
 router.patch('/:id', ResourceController.patchOne);

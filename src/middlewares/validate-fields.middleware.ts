@@ -1,7 +1,6 @@
 import { NextFunction } from 'express';
 import db from '../database/knex';
-import { HttpError } from '../utils/http-error';
-import HttpStatus from '../utils/http-status';
+import { BadRequestError } from '../utils/http-error';
 import { ResourceRequest, ResourceResponse } from '../utils/types';
 
 export default async function validateFields(req: ResourceRequest, res: ResourceResponse, next: NextFunction) {
@@ -29,10 +28,7 @@ export default async function validateFields(req: ResourceRequest, res: Resource
       continue;
     }
     
-    next(new HttpError(
-      HttpStatus.BAD_REQUEST,
-      `Field "${field}" doesn't exist for resource "${tableName}"`,
-    ));
+    next(new BadRequestError(`Field "${field}" doesn't exist for resource "${tableName}"`));
     return;
   }
   

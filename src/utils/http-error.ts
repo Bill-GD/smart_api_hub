@@ -20,3 +20,9 @@ export class ForbiddenError extends HttpError {
     super(HttpStatus.FORBIDDEN, message);
   }
 }
+
+export class BadRequestError extends HttpError {
+  constructor(message: string) {
+    super(HttpStatus.BAD_REQUEST, message);
+  }
+}

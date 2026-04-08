@@ -16,7 +16,8 @@
     "knex": "^3.2.8",
     "morgan": "^1.10.1",
     "multer": "^2.1.1",
-    "pg": "^8.20.0"
+    "pg": "^8.20.0",
+    "zod": "^4.3.6"
   },
   "devDependencies": {
     "@types/express": "^5.0.6",
