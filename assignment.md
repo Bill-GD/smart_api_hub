@@ -66,7 +66,7 @@
 
 ## 🚀 Tính Năng Bonus (Chọn ≥ 1) (+1đ/tính năng)
 
-### [A] Rate Limiting (Tự viết cấp độ Middleware)
+### [A] Rate Limiting (Tự viết cấp độ Middleware) ✅
 
 - **Mô tả:** Chống spam request bằng cách tự viết logic giới hạn (dùng In-memory Object/Map, **không
   ** dùng thư viện có sẵn).

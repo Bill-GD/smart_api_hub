@@ -26,3 +26,9 @@ export class BadRequestError extends HttpError {
     super(HttpStatus.BAD_REQUEST, message);
   }
 }
+
+export class RateLimitedError extends HttpError {
+  constructor() {
+    super(HttpStatus.RATE_LIMIT, 'You are rate limited, please wait.');
+  }
+}
