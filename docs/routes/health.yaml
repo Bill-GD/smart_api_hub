@@ -1,0 +1,24 @@
+paths:
+  /health:
+    get:
+      description: Returns current status of server, including database.
+      tags: [ Health ]
+      responses:
+        200:
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  webStatus:
+                    type: string
+                    description: Status of web server.
+                  webUptime:
+                    type: number
+                    description: The uptime of the web server.
+                  databaseClient:
+                    type: string
+                    description: The database client used.
+                  databaseStatus:
+                    type: string
+                    description: Status of database.

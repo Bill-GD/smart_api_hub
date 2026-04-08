@@ -60,7 +60,7 @@
 - [ ] Thiết lập `docker-compose.yaml` gộp chung Nodejs app + Postgresql.
 - [ ] `README.md` hướng dẫn chạy chi tiết và vẽ **Mermaid Architecture Diagram**.
 - [ ] Export bộ **Postman Collection** đầy đủ.
-- [ ] Swagger UI
+- [x] Swagger UI
 
 ---
 

@@ -1,0 +1,48 @@
+paths:
+  /auth/register:
+    post:
+      description: Registers a new user. Requires username, email and password.
+      tags: [ Authentication ]
+      requestBody:
+        $ref: '#/components/requestBodies/register'
+      responses:
+        201:
+          description: Successfully registered new user. Returns user ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+                    description: The ID of the newly registered user.
+        400:
+          $ref: '#/components/responses/400'
+        409:
+          $ref: '#/components/responses/409'
+        500:
+          $ref: '#/components/responses/500'
+  /auth/login:
+    post:
+      description: Login using email and password. Saves access token to cookie that lasts for 1 hour on success.
+      tags: [ Authentication ]
+      requestBody:
+        $ref: '#/components/requestBodies/login'
+      responses:
+        200:
+          description: Login successfully. Returns access token.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  token:
+                    type: string
+                    description: The access token.
+        400:
+          $ref: '#/components/responses/400'
+        403:
+          $ref: '#/components/responses/403'
+        500:
+          $ref: '#/components/responses/500'
+

@@ -1,0 +1,142 @@
+paths:
+  /{resource}:
+    get:
+      description: Fetch all items of the specified resource, can apply filters.
+      tags: [ Resource ]
+      parameters:
+        $ref: '#/components/parameters/resource'
+      responses:
+        200:
+          description: Successfully returned requested items.
+          content:
+            application/json:
+              schema:
+                type: array
+        400:
+          $ref: '#/components/responses/400'
+        500:
+          $ref: '#/components/responses/500'
+    post:
+      description: Creates a new resource.
+      tags: [ Resource ]
+      parameters:
+        $ref: '#/components/parameters/resource'
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/resource'
+      responses:
+        201:
+          description: Successfully created resource item. Returns ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        405:
+          $ref: '#/components/responses/405'
+        500:
+          $ref: '#/components/responses/500'
+  /{resource}/{id}:
+    get:
+      description: Fetch item of the specified resource with specified ID.
+      tags: [ Resource ]
+      parameters:
+        - $ref: '#/components/parameters/resource'
+        - $ref: '#/components/parameters/id'
+      responses:
+        200:
+          description: Successfully returned requested item.
+          content:
+            application/json:
+              schema:
+                type: object
+        400:
+          $ref: '#/components/responses/400'
+        500:
+          $ref: '#/components/responses/500'
+    put:
+      description: Replace entire item if exists, create new if not exist.
+      tags: [ Resource ]
+      parameters:
+        - $ref: '#/components/parameters/resource'
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/resource'
+      responses:
+        201:
+          description: Successfully created resource item. Returns ID.
+          content:
+            application/json:
+              schema:
+                type: object
+                properties:
+                  id:
+                    type: integer
+        204:
+          $ref: '#/components/responses/204'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+    patch:
+      description: Update item if exists.
+      tags: [ Resource ]
+      parameters:
+        - $ref: '#/components/parameters/resource'
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      requestBody:
+        $ref: '#/components/requestBodies/resource'
+      responses:
+        204:
+          $ref: '#/components/responses/204'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+    delete:
+      description: Delete the specified resource item, only for admin role.
+      tags: [ Resource ]
+      parameters:
+        - $ref: '#/components/parameters/resource'
+        - $ref: '#/components/parameters/id'
+      security:
+        - bearerAuth: []
+      responses:
+        204:
+          $ref: '#/components/responses/204'
+        400:
+          $ref: '#/components/responses/400'
+        401:
+          $ref: '#/components/responses/401'
+        403:
+          $ref: '#/components/responses/403'
+        404:
+          $ref: '#/components/responses/404'
+        500:
+          $ref: '#/components/responses/500'
+

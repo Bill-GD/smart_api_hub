@@ -15,7 +15,7 @@ export default class AuthController {
       .first();
     
     if (user) {
-      throw new HttpError(HttpStatus.FORBIDDEN, 'Email already registered');
+      throw new HttpError(HttpStatus.CONFLICT, 'Email already registered');
     }
     
     await db('users').insert({

@@ -1,0 +1,36 @@
+components:
+  requestBodies:
+    register:
+      description: The user info to register.
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            required: [ username, email, password ]
+            properties:
+              username:
+                description: Must have at least 4 characters.
+                type: string
+              email:
+                type: string
+              password:
+                description: Must have 8-30 alphanumeric characters.
+                type: string
+    login:
+      description: The user info to login.
+      content:
+        application/x-www-form-urlencoded:
+          schema:
+            type: object
+            required: [ email, password ]
+            properties:
+              email:
+                type: string
+              password:
+                type: string
+    resource:
+      description: The data to replace or create new.
+      content:
+        application/json:
+          schema:
+            type: object

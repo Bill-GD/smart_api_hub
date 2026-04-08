@@ -1,0 +1,14 @@
+components:
+  parameters:
+    resource:
+      name: resource
+      in: path
+      required: true
+      type: string
+      description: The resource name.
+    id:
+      name: id
+      in: path
+      required: true
+      type: integer
+      description: The ID of the resource.

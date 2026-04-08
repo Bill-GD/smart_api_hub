@@ -1,0 +1,7 @@
+tags:
+  - name: Authentication
+    description: User registration and login.
+  - name: Health
+    description: Health check of the server.
+  - name: Resource
+    description: The dynamic resource router.

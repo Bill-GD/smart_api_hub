@@ -10,7 +10,7 @@ export default function authorize(...roles: ('user' | 'admin')[]) {
     const { authorization: auth } = req.headers;
     
     if (!auth || !auth.startsWith('Bearer') || !auth!.split(' ')[1]) {
-      next(new HttpError(HttpStatus.BAD_REQUEST, 'Bearer token not provided'));
+      next(new HttpError(HttpStatus.UNAUTHORIZED, 'Bearer token not provided'));
       return;
     }
     
@@ -25,7 +25,7 @@ export default function authorize(...roles: ('user' | 'admin')[]) {
       res.locals.user = user;
     } catch (e) {
       if (e instanceof JsonWebTokenError) {
-        next(new ForbiddenError('Invalid token'));
+        next(new HttpError(HttpStatus.UNAUTHORIZED, 'Invalid token'));
         return;
       }
     }
