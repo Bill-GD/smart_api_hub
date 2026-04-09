@@ -53,11 +53,12 @@
 
 - [x] **Global Error Handler**: Bắt lỗi server, DB không bị crash. Response chuẩn `{ "error": "message" }`.
 - [x] **Validation (Zod)**: Bắt buộc check format ở Register, Login và các POST/PUT endpoints. Trả HTTP 400.
-- [ ] **Testing**: Viết tối thiểu **10 Test Cases** (Vitest + Supertest) cover đủ Happy path, Lỗi 400/401/403/404.
+- [x] **Testing**: Viết tối thiểu **10 Test Cases** (Vitest + Supertest) cover đủ Happy path, Lỗi 400/401/403/404.
 
 ### 7. Deployment & Docs API (1đ)
 
-- [ ] Thiết lập `docker-compose.yaml` gộp chung Nodejs app + Postgresql.
+- [x] Deploy app bằng **Docker** thông qua `Dockerfile`.
+- [ ] ~~Thiết lập `docker-compose.yaml` gộp chung Nodejs app + Postgresql.~~
 - [ ] `README.md` hướng dẫn chạy chi tiết và vẽ **Mermaid Architecture Diagram**.
 - [ ] Export bộ **Postman Collection** đầy đủ.
 - [x] Swagger UI

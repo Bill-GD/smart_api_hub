@@ -4,35 +4,17 @@ components:
       description: Completed request, returned nothing.
     400:
       description: Invalid request.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
     401:
       description: Access token is missing or invalid.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
     403:
       description: User not authorized to access or change the content.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
     404:
       description: Content not found.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'
     405:
       description: Method not allowed.
     409:
       description: Content already exist and can't be changed.
+    429:
+      description: Too many requests.
     500:
       description: Internal server error.
-      content:
-        application/json:
-          schema:
-            $ref: '#/components/schemas/error'

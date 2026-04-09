@@ -137,7 +137,7 @@ export default class ResourceController {
       await db(tableName).insert({ id, ...req.body });
       res.status(HttpStatus.CREATED).json({ id: +id });
     } else {
-      await db(tableName).update(req.body).where({ id });
+      await db(tableName).where({ id }).update(req.body);
       res.sendStatus(HttpStatus.NO_CONTENT);
     }
   }

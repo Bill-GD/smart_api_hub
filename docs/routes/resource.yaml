@@ -14,6 +14,8 @@ paths:
                 type: array
         400:
           $ref: '#/components/responses/400'
+        429:
+          $ref: '#/components/responses/429'
         500:
           $ref: '#/components/responses/500'
     post:
@@ -43,6 +45,8 @@ paths:
           $ref: '#/components/responses/403'
         405:
           $ref: '#/components/responses/405'
+        429:
+          $ref: '#/components/responses/429'
         500:
           $ref: '#/components/responses/500'
   /{resource}/{id}:
@@ -61,6 +65,8 @@ paths:
                 type: object
         400:
           $ref: '#/components/responses/400'
+        429:
+          $ref: '#/components/responses/429'
         500:
           $ref: '#/components/responses/500'
     put:
@@ -91,8 +97,8 @@ paths:
           $ref: '#/components/responses/401'
         403:
           $ref: '#/components/responses/403'
-        404:
-          $ref: '#/components/responses/404'
+        429:
+          $ref: '#/components/responses/429'
         500:
           $ref: '#/components/responses/500'
     patch:
@@ -116,6 +122,8 @@ paths:
           $ref: '#/components/responses/403'
         404:
           $ref: '#/components/responses/404'
+        429:
+          $ref: '#/components/responses/429'
         500:
           $ref: '#/components/responses/500'
     delete:
@@ -137,6 +145,8 @@ paths:
           $ref: '#/components/responses/403'
         404:
           $ref: '#/components/responses/404'
+        429:
+          $ref: '#/components/responses/429'
         500:
           $ref: '#/components/responses/500'
 
