@@ -59,8 +59,8 @@
 
 - [x] Deploy app bằng **Docker** thông qua `Dockerfile`.
 - [ ] ~~Thiết lập `docker-compose.yaml` gộp chung Nodejs app + Postgresql.~~
-- [ ] `README.md` hướng dẫn chạy chi tiết và vẽ **Mermaid Architecture Diagram**.
-- [ ] Export bộ **Postman Collection** đầy đủ.
+- [x] `README.md` hướng dẫn chạy chi tiết ~~và vẽ **Mermaid Architecture Diagram**~~.
+- [x] Export bộ **Postman Collection** đầy đủ.
 - [x] Swagger UI
 
 ---
