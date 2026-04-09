@@ -1,3 +1,4 @@
+import cors from 'cors';
 import express, { NextFunction, Request, Response } from 'express';
 import morgan from 'morgan';
 import swaggerUi from 'swagger-ui-express';
@@ -14,6 +15,7 @@ app.set('trust proxy', 1);
 if (process.env.NODE_ENV !== 'test') {
   app.use(morgan('dev'));
 }
+app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
