@@ -20,6 +20,7 @@ COPY package*.json ./
 RUN npm i --omit=dev
 
 COPY --from=builder /app/dist ./dist
+COPY --from=builder /app/docs ./docs
 COPY schema.json .
 
 # Use user `node` for security instead of `root` user

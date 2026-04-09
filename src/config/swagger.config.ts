@@ -5,7 +5,7 @@ const options: swaggerJsDoc.Options = {
     openapi: '3.0.0',
     info: {
       title: 'Smart API Hub',
-      description: 'A json-server-like API server.',
+      description: 'A json-server-like API server. Has 3 entities: users, posts, comments',
       version: '0.1.0',
     },
   },

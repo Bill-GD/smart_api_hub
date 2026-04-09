@@ -4,7 +4,7 @@ paths:
       description: Fetch all items of the specified resource, can apply filters.
       tags: [ Resource ]
       parameters:
-        $ref: '#/components/parameters/resource'
+        - $ref: '#/components/parameters/resource'
       responses:
         200:
           description: Successfully returned requested items.
@@ -20,7 +20,7 @@ paths:
       description: Creates a new resource.
       tags: [ Resource ]
       parameters:
-        $ref: '#/components/parameters/resource'
+        - $ref: '#/components/parameters/resource'
       security:
         - bearerAuth: []
       requestBody:
